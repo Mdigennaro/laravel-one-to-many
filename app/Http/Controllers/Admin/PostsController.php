@@ -30,7 +30,8 @@ class PostsController extends Controller
      */
     public function create()
     {
-        return view('admin.posts.create');
+        $categories = Category::all();
+        return view('admin.posts.create', compact('categories'));
     }
 
     /**
@@ -79,10 +80,11 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
+        $categories = Category::all();
         $post = Post::find($id);
 
         if($post){
-            return view('admin.posts.edit', compact('post'));
+            return view('admin.posts.edit', compact('post'), compact('categories'));
         }
         abort(404,'Pagina non trovata');
 

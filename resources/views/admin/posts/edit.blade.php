@@ -30,6 +30,7 @@
       id="title" name="title" placeholder="Come lo chiami il post?"
       value="{{old('title', $post->title)}}">
     </div>
+
     <div class="mb-4">
       <label for="content" class="form-label">Post</label>
       <textarea class="form-control @error('content')
@@ -37,6 +38,20 @@
       @enderror" 
       id="content" name="content" rows="3" placeholder="Scrivi qui il tuo post ...">{{old('content', $post->content)}}
       </textarea>
+    </div>
+        
+    <div class=" mb-4">
+      <label for="category_id">Categoria</label>
+      <select name="category_id" id="category_id" class="form-control w-25" aria-label="Default select example">
+        <option >Categoria</option>
+        @foreach ($categories as $category)
+          
+        <option @if ($category->id== old('category_id', $post->category_id))
+          selected
+        @endif value="{{$category->id}}">{{$category->name}}</option>
+        
+        @endforeach
+      </select>
     </div>
   
     <div class="btn-action">
